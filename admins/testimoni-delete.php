@@ -3,17 +3,17 @@
 require_once 'classProduk.php';
 
 $burger = new Produk\Burger;
-$id_proyek = $_GET['id_proyek'];
+$id_testimoni = $_GET['id_testimoni'];
 
-if ($burger->delete($id_proyek, 'id_proyek', 'proyek')){
+if ($burger->delete($id_testimoni, 'id_testimoni', 'testimoni')){
     echo "<script>
             alert('data berhasil dihapus');
-            document.location.href = 'produk.php';
+            document.location.href = 'testimoni.php';
       </script>";
 }else{
   echo "  <script>
             alert('data gagal dihapus');
-            document.location.href = 'produk.php';
+            document.location.href = 'testimoni.php';
             </script>";
 }
 

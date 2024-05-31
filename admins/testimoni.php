@@ -15,13 +15,14 @@ $burger = $hasil->readTestimoni();
       <div class="row">
         <div class="col-12 p-3 bg-white">
           <h3>Testimoni</h3>
+           <a href="formTambahTestimoni.php" class="btn btn-primary  mb-3">Add</a>
           <table class="table table-bordered">
             <thead>
               <tr>
                 <th class="text-center">Number</th>
                     <th class="text-center">Testimoni</th>
-                    <th class="text-center">Tambahkan ke profil</th>
-                    <th class="text-center">Status</th>
+                    <th class="text-center">Gambar Kontrak</th>
+                    <th class="text-center">Aksi</th>
                   </tr>
             </thead>
             <tbody>
@@ -30,16 +31,11 @@ $burger = $hasil->readTestimoni();
                 <tr>
                   <td><?=$i++ ?></td>
                   <td ><?=$row['deskripsi']?></td>
-                  <td><a href="tambahTestimoni.php?id_testimoni=<?=$row['id_testimoni']?>" class="btn btn-primary btn-sm " onclick="return confirm('yakin?');">Tambah</a>
-                    <a href="hapusTestimoni.php?id_testimoni=<?=$row['id_testimoni']?>" class="btn btn-danger btn-sm " onclick="return confirm('yakin?');">Delete</a>
-                </td>
-                  <td><?php 
-                  if($row['isDisplay'] == 1){
-                    echo "Sudah ditambahkan";
-                  }else{
-                    echo "Belum ditambahkan";
-                  }
-                  ?></td>
+                  <td class="text-center"><img src="../img/<?=$row['gambar']?>" alt="" style="width: 100px;"></td>
+                  <td>
+                    <a  href="testimoni-form.php?id_testimoni=<?=$row['id_testimoni'];?>" class="btn btn-warning btn-sm ">Edit</a>
+                    <a href="testimoni-delete.php?id_testimoni=<?=$row['id_testimoni'];?>" class="btn btn-danger btn-sm " onclick="return confirm('yakin?');">Delete</a>
+                   </td>
                   </tr>
                   <?php endforeach; ?>
                 </tbody>

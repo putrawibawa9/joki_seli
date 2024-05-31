@@ -76,10 +76,10 @@ CREATE TABLE `proyek` (
   `nama_proyek` varchar(100) NOT NULL,
   `lokasi_proyek` varchar(100) NOT NULL,
   `foto_proyek` varchar(100) NOT NULL,
-  `deskripsi_proyek` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `deskripsi_proyek` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tanggal_proyek` date NOT NULL,
   `status_proyek` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `proyek`
@@ -103,7 +103,7 @@ CREATE TABLE `testimoni` (
   `id_testimoni` int NOT NULL,
   `deskripsi` varchar(100) NOT NULL,
   `isDisplay` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `testimoni`

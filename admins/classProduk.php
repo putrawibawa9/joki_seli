@@ -22,7 +22,7 @@ class Burger extends Connect{
         }
     public function readTestimoniUser(){
         $conn = $this->getConnection();
-        $query = "SELECT * FROM testimoni WHERE isDisplay = 1";  
+        $query = "SELECT * FROM testimoni";  
         $result = $conn->query($query);
         $burger = $result->fetchAll();
         return $burger;
@@ -34,6 +34,7 @@ class Burger extends Connect{
         $result = $conn->exec($query);
         return $result;
     }
+
 
     public function readTwoTable(){
         $conn = $this->getConnection();
@@ -110,6 +111,25 @@ class Burger extends Connect{
         return true;
     }
 
+
+    public function tambahTestimoni($data){
+        $conn = $this->getConnection();
+        $deskripsi = $data['deskripsi'];
+        $foto = $this->uploadGambar();
+        if (!$foto) {
+            return false;
+        }
+
+        $query = "INSERT INTO testimoni (deskripsi, gambar) 
+          VALUES (?, ?)";
+    
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(1,$deskripsi);
+        $stmt->bindParam(2,$foto);
+        $stmt->execute();
+        return true;
+    }
+
         public function addTestimoni($data){
         $conn = $this->getConnection();
         $deskripsi = $data['deskripsi'];
@@ -123,8 +143,7 @@ class Burger extends Connect{
     }
 
     public function editProduk($data){
-        // var_dump($data);
-        // exit;
+
         $conn = $this->getConnection();
         $nama_proyek = $data['nama_proyek'];
         $lokasi_proyek = $data['lokasi_proyek'];
@@ -161,13 +180,47 @@ class Burger extends Connect{
                 $stmt->execute();
                 return true;
     }
+    public function editTestimoni($data){
+
+        $conn = $this->getConnection();
+        $id_testimoni = $data['id_testimoni'];
+        $deskripsi = $data['deskripsi'];
+        $gambarLama = $data['gambarLama'];
+          //check whether user pick a new image or not
+        if($_FILES['foto']['error']===4){
+            $foto = $gambarLama;
+        }else{
+            $foto = $this->uploadGambar();
+        }
+
+        $query = "UPDATE testimoni SET
+        deskripsi = ?,
+        gambar = ?
+        WHERE id_testimoni = ?
+        ";
+             $stmt = $conn->prepare($query);
+                $stmt->bindParam(1,$deskripsi);
+                $stmt->bindParam(2,$foto);
+                $stmt->bindParam(3,$id_testimoni);
+                $stmt->execute();
+                return true;
+    }
+
+        public function viewEach($table, $field, $id_kategori){
+        $conn = $this->getConnection();
+        $query = "SELECT * FROM $table WHERE $field= $id_kategori";
+        $result = $conn->query($query);
+        $kategori = $result->fetch();
+        return $kategori;
+    }
+    
 
 
     public function uploadGambar(){
-        $namaFile = $_FILES['foto_proyek']['name'];
-        $ukuranFile =  $_FILES['foto_proyek']['size'];
-        $error =  $_FILES['foto_proyek']['error'];  
-        $tmp =  $_FILES['foto_proyek']['tmp_name'];  
+        $namaFile = $_FILES['foto']['name'];
+        $ukuranFile =  $_FILES['foto']['size'];
+        $error =  $_FILES['foto']['error'];  
+        $tmp =  $_FILES['foto']['tmp_name'];  
       
         //cek apakah user sudah menambah gambar
       
@@ -216,14 +269,14 @@ class Burger extends Connect{
         return $result;
 }
 
-    public function tambahTestimoni($id_testimoni){
+    public function delete($id, $field, $table){
         $conn = $this->getConnection();
-        $query = "UPDATE testimoni
-                        SET isDisplay = 1
-                        WHERE id_testimoni = $id_testimoni;";
+        $query = "DELETE FROM $table WHERE $field = $id";
         $result = $conn->exec($query);
         return $result;
 }
+
+
     public function hapusTestimoni($id_testimoni){
         $conn = $this->getConnection();
         $query = "UPDATE testimoni

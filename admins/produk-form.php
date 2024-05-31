@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
             <img src="../img/<?= $result['foto_proyek'] ?>" width="100px" height="100px">
             <div class="mb-3">
                 <label for="gambar" class="form-label"> Burger Picture</label>
-                <input type="file" name="foto_proyek" class="form-control" required>
+                <input type="file" name="foto" class="form-control" required>
             </div>
 
             <div class="mb-3">

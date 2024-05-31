@@ -26,6 +26,7 @@ $burger = $hasil->readProduk();
                     <th class="text-center">Deskripsi Proyek</th>
                     <th class="text-center">Tanggal Proyek</th>
                     <th class="text-center">Status Proyek</th>
+                       <th class="text-center">Aksi</th>
                   </tr>
             </thead>
             <tbody>

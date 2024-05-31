@@ -3,9 +3,8 @@
 require_once 'classProduk.php';
 
 $burger = new Produk\Burger;
-$id_testimoni = $_GET['id_testimoni'];
-
-if ($burger->tambahTestimoni($id_testimoni)){
+$data = $_POST;
+if ($burger->tambahTestimoni($data)){
     echo "<script>
             alert('data berhasil ditambah');
             document.location.href = 'testimoni.php';
